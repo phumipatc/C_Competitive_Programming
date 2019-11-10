@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct A
+{
+	long long i,j,t,g,w,gem;
+};
+A tp,now;
+queue<A>q;
+char a[205][205];
+int mark[205][205][130][7];
+int d[6][3] = {{1,0},{0,1},{0,0},{-1,0},{0,-1}};
+int main()
+{
+	int n,m,tmp = 97;
+	scanf("%d %d",&n,&m);
+	for(int i=1; i<=n; i++)
+	{
+		scanf(" %s",a[i]+1);
+		for(int j=1; j<=m; j++)
+		{
+			if(a[i][j] == 'S')
+			   tp.i = i,tp.j = j;
+			if(a[i][j] == 'G')
+				a[i][j] = tmp,tmp++;
+		}
+	}
+	tp.t = 1,tp.g = tp.w = 0;
+	tp.gem = 0;
+	mark[tp.i][tp.j][tp.g][tp.t] = 1;
+	q.push(tp);
+	while(!q.empty())
+	{
+		now = q.front();
+		q.pop();
+		tp.g = now.g;
+		if(now.gem == 7)
+		{
+			printf("%lld\n",now.w);
+			return 0;
+		}
+		for(int i=0; i<5; i++)
+		{
+			tp.i = now.i+d[i][0];
+			tp.j = now.j+d[i][1];
+			tp.t = now.t+1;
+			tp.gem = now.gem;
+			tp.g = now.g;
+			tp.w = now.w+1;
+			if(a[tp.i][tp.j] >= 97 && a[tp.i][tp.j] <= 97+6)
+				tp.g = (tp.g | (1<<(a[tp.i][tp.j]-97)));
+			if(tp.g != now.g)
+				tp.gem++;
+			if(tp.t > 6)
+				tp.t = 1;
+			if(tp.i < 1 || tp.j < 1 || tp.i > n || tp.j > m)
+				continue;
+			if(a[tp.i][tp.j] == '#')
+				continue;
+			if(mark[tp.i][tp.j][tp.g][tp.t])
+				continue;
+			if(a[tp.i][tp.j] >= '1' && a[tp.i][tp.j] <= '6')
+				if(tp.t != a[tp.i][tp.j] - '0' && tp.gem < a[tp.i][tp.j] -'0')
+					continue;
+			q.push(tp);
+			mark[tp.i][tp.j][tp.g][tp.t] = 1;
+		}
+	}
+	printf("-1\n");
+	return 0;
+}
+/*
+2 6
+S##G#G
+GGGG5G
+*/

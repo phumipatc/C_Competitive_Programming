@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+char Start[10] = {"codecube"};
+char a[100010];
+int main()
+{
+	scanf(" %s",a);
+	int n = strlen(a);
+	int ans = 0,now = 0;
+	for(int i = 0; i<n; i++)
+	{
+	   // printf("%c %c = \n",a[i],Start[now]);
+		while(a[i] != Start[now])
+		{
+			now++;
+			ans++;
+			now%=8;
+		}
+		now++;
+		now%=8;
+	   // printf("%d\n",now);
+	}
+	//printf("%d\n",now);
+	if(now!=0)ans += (8-now);
+	printf("%d\n",ans);
+	return 0;
+}

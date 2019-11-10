@@ -1,0 +1,30 @@
+/*
+	Author  : Phumipat C.
+	School  : RYW
+	Language: C++
+*/
+#include<bits/stdc++.h>
+using namespace std;
+char a[1000010],b[1000010];
+int KMP[1000010];
+int main(){
+    int lena,lenb,j = 0;
+    scanf(" %s %s",a+1,b+1);
+    lena = strlen(a+1),lenb = strlen(b+1);
+    for(int i=2;i<=lenb;i++){
+        while(j>0 && b[j+1]!=b[i])  j = KMP[j];
+        if(b[j+1] == b[i])  j++;
+        KMP[i] = j;
+    }
+    j = 0;
+    for(int i=1;i<=lena;i++){
+        while(j>0 && b[j+1]!=a[i])  j = KMP[j];
+        if(b[j+1] == a[i])  j++;
+        if(j == lenb){
+            printf("Lucky\n");
+            return 0;
+        }
+    }
+    printf("Unlucky\n");
+	return 0;
+}

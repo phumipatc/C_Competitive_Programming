@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<int>down[100100];
+typedef pair<int,int> PII;
+set<PII>ad[100100],er[100100];
+int up[100100];
+int mx[100100];
+long long sum[100100];
+vector<int>ans;
+void Findmx(int now,int m)
+{
+	if(now == 0)
+		return;
+	m = max(m,now);
+	mx[now] = max(mx[now],m);
+	Findmx(up[now],m);
+}
+void FindChild(int now)
+{
+	for(int i=0; i<down[now].size(); i++)
+	{
+		FindChild(down[now][i]);
+		ad[now].insert(make_pair(mx[down[now][i]],down[now][i]));
+	}
+}
+void Pre(int now)
+{
+	set<PII>::iterator it;
+	for(it = ad[now].begin();it!=ad[now].end();it++)
+		Pre((*it).second);
+	ans.push_back(now);
+}
+int main()
+{
+	int n,q,Head,type,k;
+	scanf("%d %d",&n,&q);
+	for(int i=1; i<=n; i++)
+	{
+		scanf("%d",&up[i]);
+		if(up[i] == 0)
+			Head = i;
+		down[up[i]].push_back(i);
+	}
+	for(int i=1; i<=n; i++)
+		if(down[i].size() == 0)
+			Findmx(i,i);
+	FindChild(Head);
+	Pre(Head);
+	int now = 0;
+	for(int i=1;i<=ans.size();i++)
+		sum[i] = ans[i-1]+sum[i-1];
+	while(q--)
+	{
+		scanf("%d",&type);
+		if(type == 3)
+		{
+			printf("%lld\n",sum[now]);
+		}
+		if(type == 1)
+		{
+			scanf("%d",&k);
+			now+=k;
+			printf("%d\n",ans[now-1]);
+		}
+		if(type == 2)
+		{
+			scanf("%d",&k);
+			now-=k;
+		}
+	}
+	return 0;
+}

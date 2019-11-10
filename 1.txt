@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+pair<int,int> mic[50][50][50];
+long long a[100100];
+int cnt[4],ans,ans2;
+int main()
+{
+	int n,kk,cnt2,cnt3,cnt5;
+	long long tmp;
+	mic[0][0][0].first = 1;
+	mic[0][0][0].second = 0;
+	scanf("%d %d",&n,&kk);
+	for(int ii=1;ii<=n;ii++)
+	{
+		scanf("%lld",&a[ii]);
+		tmp = a[ii];
+		cnt2 = cnt3 = cnt5 = 0;
+		while(tmp%2==0)
+			tmp/=2,cnt2++;
+		while(tmp%3==0)
+			tmp/=3,cnt3++;
+		while(tmp%5==0)
+			tmp/=5,cnt5++;
+		if(mic[cnt2][cnt3][cnt5].first){
+			ans++;
+			ans2 += mic[cnt2][cnt3][cnt5].second;
+		}
+		else
+		{
+			cnt[1] = cnt2;
+			cnt[2] = cnt3;
+			cnt[3] = cnt5;
+			for(int i=0;i<=17;i++)
+			{
+				for(int j=0;j<=11;j++)
+				{
+					for(int k=0;k<=8;k++)
+					{
+						if(mic[i][j][k].first)
+						{
+							if(mic[i+cnt[1]][j+cnt[2]][k+cnt[3]].first)
+								mic[i+cnt[1]][j+cnt[2]][k+cnt[3]].second = min(mic[i+cnt[1]][j+cnt[2]][k+cnt[3]].second,mic[i][j][k].second+1);
+							else
+								mic[i+cnt[1]][j+cnt[2]][k+cnt[3]].second = mic[i][j][k].second+1;
+							mic[i+cnt[1]][j+cnt[2]][k+cnt[3]].first = 1;
+						}
+					}
+				}
+			}
+		}
+	}
+	printf("%d ",ans);
+	if(kk == 2)
+		printf("%d\n",ans2);
+	return 0;
+}
