@@ -22,9 +22,9 @@ int main(){
     ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
     int n,m,K,t,u,l;
     cin >> n >> m >> K >> t;
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=m;j++){
-            for(int k=0;k<K;k++){
+    for(int k=0;k<K;k++){
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
                 cin >> gate[i][j][k].first >> gate[i][j][k].second;
                 if(k == 0)  continue;
                 gate[i][j][k].first = max(gate[i][j][k].first,gate[i][j][k-1].first);
