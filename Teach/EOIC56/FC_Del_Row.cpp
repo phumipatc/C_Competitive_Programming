@@ -12,23 +12,20 @@ map<string ,int > mapp;
 int main(){
     // ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
     int n,m,ch;
-    scanf("%d %d",&n,&m);
+    cin >> n >> m;
     for(int i=1;i<=n;i++)
-        scanf(" %s",a[i]+1);
+        cin >> a[i]+1;
     for(int i=n;i>=1;i--){
+        mapp.clear();
         ch = 1;
         for(int j=1;j<=m;j++){
             col[j].push_back(a[i][j]);
-            if(mapp[col[j]]){
-                // cout << col[j] << '\n';
-                ch = 0;
-                break;
-            }
+            if(mapp[col[j]])    ch = 0;
+            if(!ch)             continue;
             mapp[col[j]]++;
         }
-        mapp.clear();
         if(ch){
-            printf("%d\n",i-1);
+            cout << i-1 << "\n";
             break;
         }
     }
