@@ -8,8 +8,8 @@
 using namespace std;
 string str;
 int main(){
-    int n;
-    cin >> n
+    int n,ans;
+    cin >> n;
     for(n++;n>1;n/=2)
         ans = ((n&1)?"7":"4") + str;
     cout << str;
