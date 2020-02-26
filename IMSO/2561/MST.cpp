@@ -21,8 +21,8 @@ int find_root(int u){
 	else			return p[u] = find_root(p[u]);
 }
 int main(){
-	freopen("0_in.txt","r",stdin);
-	freopen("0_out.txt","w",stdout);
+	// freopen("1.in","r",stdin);
+	// freopen("1.sol","w",stdout);
 	int n,m,u,v,w,ru,rv,sum = 0;
 	scanf("%d %d",&n,&m);
 	for(int i=0;i<n;i++)	p[i] = i;

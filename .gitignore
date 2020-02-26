@@ -21,6 +21,7 @@
 *.out
 *.rar
 *.zip
+*.o
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -40,5 +41,10 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.lnk
+*.pdf
+*.sol
 Gen_case.cpp
+Gencase.cpp
 Sol.cpp
+Teach.cpp
+test.cpp
