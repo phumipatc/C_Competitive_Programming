@@ -6,20 +6,27 @@
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long LL;
-int c;
-int mod_of_pow(int a,int b){
-	if(b == 0)	return 1;
-	if(b == 1)	return a%c;
-	int div = mod_of_pow(a,b/2)%c;
-	if(b%2)	return (((div*div)%c)*a)%c;
-	else	return (div*div)%c;
-}
+char str[110];
 int main(){
-	int q,a,b;
-	scanf("%d",&q);
+	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
+	int q,n;
+	cin >> q;
 	while(q--){
-		scanf("%d %d %d",&a,&b,&c);
-		printf("%d\n",mod_of_pow(a,b));
+		cin >> str+1;
+		n = strlen(str+1);
+		int l = 1,r = n;
+		for(;l<=n;l++){
+			if(str[l] == '1')
+				break;
+		}
+		for(;r>=1;r--){
+			if(str[r] == '1')
+				break;
+		}
+		int countt = 0;
+		for(;l<=r;l++)
+			countt+=(str[l] == '0');
+		cout << countt << '\n';
 	}
 	return 0;
 }
