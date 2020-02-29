@@ -97,8 +97,15 @@ int main(){
 					sum%=MOD;
 				}
 			}else{
-				sum+=a[i].w*3;
-				sum%=MOD;
+				if(now[0] == now[1] || now[1] == now[2] || now[0] == now[2]){
+					ans*=2;
+					ans%=MOD;
+					sum+=a[i].w*2;
+					sum%=MOD;
+				}else{
+					sum+=a[i].w*3;
+					sum%=MOD;
+				}
 			}
 			for(auto x:now)
 				mark[x.u] = mark[x.v] = 0;
