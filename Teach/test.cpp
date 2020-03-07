@@ -6,27 +6,24 @@
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long LL;
-char str[110];
+struct A{
+	int u,v,w;
+	bool operator < (const A&o) const{
+		return w>o.w;
+	}
+};
+A now;
+priority_queue<A > heap;
+vector<pair<int ,int > > X,Y,Z;
 int main(){
-	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
-	int q,n;
-	cin >> q;
-	while(q--){
-		cin >> str+1;
-		n = strlen(str+1);
-		int l = 1,r = n;
-		for(;l<=n;l++){
-			if(str[l] == '1')
-				break;
-		}
-		for(;r>=1;r--){
-			if(str[r] == '1')
-				break;
-		}
-		int countt = 0;
-		for(;l<=r;l++)
-			countt+=(str[l] == '0');
-		cout << countt << '\n';
+	int n;
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++){
+		int x,y,z;
+		scanf("%d %d %d",&x,&y,&z);
+		X.push_back({x,i});
+		Y.push_back({y,i});
+		Z.push_back({z,i});
 	}
 	return 0;
 }
