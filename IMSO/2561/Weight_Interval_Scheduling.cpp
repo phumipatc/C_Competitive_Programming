@@ -16,8 +16,8 @@ struct A{
 A a[1010];
 int bs[1010],dp[1010];
 int main(){
-	freopen("0_in.txt","r",stdin);
-	freopen("0_out.txt","w",stdout);
+	// freopen("0_in.txt","r",stdin);
+	// freopen("0_out.txt","w",stdout);
 	int n,idx;
 	scanf("%d",&n);
 	for(int i=1;i<=n;i++)

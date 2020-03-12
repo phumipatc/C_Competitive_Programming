@@ -15,8 +15,8 @@ LL mod_of_pow(LL a,LL b,LL c){
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
-	freopen("in.txt","r",stdin);
-	freopen("out.txt","w",stdout);
+	// freopen("in.txt","r",stdin);
+	// freopen("out.txt","w",stdout);
 	LL q,r,n,m;
 	cin >> q;
 	for(int x=1;x<=q;x++){
@@ -34,5 +34,6 @@ int main(){
 }
 /*
 1
-930 585374422 991084756
+632 213648213 773978542
+
 */
