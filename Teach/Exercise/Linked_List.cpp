@@ -14,6 +14,7 @@ int main(){
 	cin >> n >> k;
 	for(int i=0;i<=n;i++)
 		l[i] = i-1,r[i] = i+1;
+		
 	while(k--){
 		cin >> opr >> x >> y;
 		//cut x
