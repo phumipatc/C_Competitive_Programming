@@ -6,7 +6,7 @@
 */
 #include<bits/stdc++.h>
 using namespace std;
-int a[6][6],ans=17;
+int a[10][10],ans=1e9;
 void play(int i,int j,int state){
 	int ii,jj,t=a[1][1],ch=1;
 	for(ii=1;ii<=4;ii++)
@@ -14,8 +14,9 @@ void play(int i,int j,int state){
 			if(a[ii][jj]!=t)
 				ch=0;
 	if(ch){
-		if(state<ans)
+		if(state<ans){
 			ans=state;
+		}
 		return ;
 	}
 	if(i<1||j<1||i>4||j>4)	return ;
@@ -44,7 +45,7 @@ int main(){
 		}
 	}
 	play(1,1,0);
-	printf((ans==17)?"Impossible\n":"%d\n",ans);
+	printf((ans==1e9)?"Impossible\n":"%d\n",ans);
 	return 0;
 }
 
