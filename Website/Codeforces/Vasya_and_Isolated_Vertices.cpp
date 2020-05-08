@@ -1,5 +1,4 @@
 /*
-    Task    :
     Author  : Phumipat C.
     School  : RYW
     Language: C++
