@@ -1,7 +1,7 @@
 /*
 	Author  : Phumipat C.
 	School  : RYW
-	Language: C++
+	Language: C++ 
 */
 #include<bits/stdc++.h>
 #define MOD (int )(1e9+7)
