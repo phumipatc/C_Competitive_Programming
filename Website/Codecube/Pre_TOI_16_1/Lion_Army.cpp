@@ -1,90 +1,85 @@
 /*
-	Unfinished
 	Author  : Phumipat C.
 	School  : RYW
 	Language: C++
 */
 #include<bits/stdc++.h>
-#define MOD (LL )(1e9+7);
+#define MOD (int )(1e9+7)
 using namespace std;
 typedef long long LL;
-LL po[300010],sizee[300010];
-pair<LL ,LL > p[300010];
-LL fr(LL i){
-	if(p[i].first == i)	return i;
-	else				return p[i].first = fr(p[i].first);
+int p[300010],op[300010],po[300010];
+int fr(int i){
+	return p[i] = (p[i] == i)?i:fr(p[i]);
 }
-LL mergee(LL u,LL v){
-	if(sizee[u]>=sizee[v]){
-		p[v].first = u;
-		sizee[v]+=sizee[u];
-		return v;
-	}else{
-		p[u].first = v;
-		sizee[u]+=sizee[v];
-		return u;
+int gr,impos;
+void solve(){
+	int opr,u,v,ru,rv;
+	cin >> opr >> u >> v;
+	if(impos){
+		cout << "0\n";
+		return ;
 	}
+	ru = fr(u),rv = fr(v);
+	if(opr == 0){
+		if(ru == rv){
+			impos = 1;
+			cout << "0\n";
+			return ;
+		}
+		if(op[ru])	op[ru] = fr(op[ru]);
+		if(op[rv])	op[rv] = fr(op[rv]);
+		if(ru == op[rv] || rv == op[ru]);
+		else{
+			gr--;
+			if(op[rv])	p[ru] = op[rv];
+			if(op[ru])	p[rv] = op[ru];
+			ru = fr(ru),rv = fr(rv);
+			if(op[ru])	p[op[ru]] = rv;
+			if(op[rv])	p[op[rv]] = ru;
+			op[ru] = rv,op[rv] = ru;
+		}
+	}else{
+		if(op[ru])	op[ru] = fr(op[ru]);
+		if(op[rv])	op[rv] = fr(op[rv]);
+		if(ru == op[rv] || rv == op[ru]){
+			impos = 1;
+			cout << "0\n";
+			return ;
+		}
+		if(ru == rv);
+		else{
+			gr--;
+			if(op[ru] && op[rv]){
+				p[op[ru]] = op[rv];
+				op[ru] = op[rv];
+				p[ru] = rv;
+			}else if(op[ru]){
+				op[rv] = op[ru];
+				p[rv] = ru;
+			}else if(op[rv]){
+				op[ru] = op[rv];
+				p[ru] = rv;
+			}else{
+				p[ru] = rv;
+			}
+		}
+	}
+	// printf("%d\n",gr);
+	cout << po[gr] << '\n';
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
-	LL n,m;
-	LL zero = 0,countt;
+	int n,m;
 	cin >> n >> m;
-	countt = n;
+	gr = n;
 	po[0] = 1;
-	for(LL i=1;i<=n;i++){
-		p[i] = {i,-1};
-		sizee[i] = 1;
+	for(int i=1;i<=n;i++){
+		p[i] = i;
 		po[i] = (2*po[i-1])%MOD;
+		// printf("%d %d\n",i,po[i]);
 	}
-	LL opr,u,v;
 	while(m--){
-		if(zero){
-			cout << "0\n";
-			continue;
-		}
-		cin >> opr >> u >> v;
-		LL ru = fr(u),rv =fr(v);
-		if(opr == 0){
-			if(ru == rv){
-				zero = 1;
-				printf("0\n");
-				continue;
-			}
-			if(ru != p[rv].second){
-				LL l,r;
-				LL ruu = p[ru].second,rvv = p[rv].second;
-				if(rvv!=-1)	l = mergee(rvv,ru);
-				else					l = ru;
-				if(ruu!=-1)	r = mergee(ruu,rv);
-				else					r = rv;
-				p[r].second = l,p[l].second = r;
-				countt--;
-			}
-		}else{
-			if(ru == p[rv].second){
-				zero = 1;
-				cout << "0\n";
-				continue;
-			}
-			if(ru!=rv){
-				LL l,r;
-				LL ruu = p[ru].second,rvv = p[rv].second;
-				if(ruu!=-1){
-					if(rvv!=-1)	l = mergee(ruu,rvv);
-					else	l = ruu;
-				}else		l = rvv;
-				r = mergee(ru,rv);
-				// printf("%lld %lld\n",l,r);
-				if(l!=-1)				p[r].second = l,p[l].second = r;
-				countt--;
-			}
-		}
-		// printf("%d\n",countt);
-		cout << po[countt] << '\n';
-		// for(LL i=1;i<=n;i++){
-		// 	printf("%lld: %lld %lld\n",i,p[i].first,p[i].second);
-		// }
+		solve();
 	}
 	return 0;
 }
