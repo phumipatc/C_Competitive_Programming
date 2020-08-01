@@ -43,6 +43,9 @@ $RECYCLE.BIN/
 *.lnk
 *.pdf
 *.sol
+*.inp
+*.oac
+*.out
 Gen_case.cpp
 Gencase.cpp
 Sol.cpp

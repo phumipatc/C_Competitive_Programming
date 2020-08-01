@@ -1,34 +1,24 @@
 /*
+	Author  : Phumipat C.
 	School  : RYW
 	Language: C++
 */
 #include<bits/stdc++.h>
+#define INF 1e18
+#define pb(a) push_back(a)
 using namespace std;
-int mark[22],anss[7];
-int countt = 0;
-void permute(int state,int sum,int last){
-	if(state == 6)	return ;
-	if(sum>20)		return ;
-	if(sum == 20){
-		//printf("%d: ",countt);
-		countt++;
-		for(int i=1;i<state;i++)
-			printf("%d ",anss[i]);
-		printf("\n");
-		return ;
-	}
-	for(int i=last+1;i<=20;i++){
-		if(mark[i])	continue;
-		mark[i] = 1;
-		anss[state] = i;
-		permute(state+1,sum+i,i);
-		mark[i] = 0;
-	}
-}
+typedef long long LL;
+const int dir4[2][4] = {{1,-1,0,0},{0,0,1,-1}};
+const int dir8[2][8] = {{-1,-1,-1,0,1,1,1,0},{1,0,-1,1,1,0,-1,-1}};
 int main(){
-	freopen("temp.txt","w",stdout);
-	printf("%d\n",countt);
-	permute(1,0,0);
-	printf("%d\n",countt);
+	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
+	vector<int> v;
+	int n;
+	cin >> n;
+	cout << n;
+	v.push_back(10);
+	for(auto x:v){
+		cout << x;
+	}
 	return 0;
 }
