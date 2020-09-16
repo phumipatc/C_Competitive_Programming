@@ -46,6 +46,7 @@ $RECYCLE.BIN/
 *.inp
 *.oac
 *.out
+*.txt
 Gen_case.cpp
 Gencase.cpp
 Sol.cpp
