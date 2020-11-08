@@ -3,6 +3,7 @@
 	School	: RYW
 	Langauge: C++
 	Algo	: Binary Search
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 using namespace std;

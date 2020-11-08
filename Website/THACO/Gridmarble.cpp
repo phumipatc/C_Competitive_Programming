@@ -3,6 +3,7 @@
 	School	: RYW
 	Langauge: C++
 	Algo	: Dynamic Programming
+	Status	: Unfinished
 */
 #include<bits/stdc++.h>
 using namespace std;

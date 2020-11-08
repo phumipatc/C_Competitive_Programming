@@ -3,6 +3,7 @@
     School	: RYW
     Langauge: C++
     Algo	: Implementing
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 using namespace std;
