@@ -2,7 +2,7 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	: MST
+	Algo	: 
 	Status	: Unfinished
 */
 #include<bits/stdc++.h>
