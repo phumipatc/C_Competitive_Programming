@@ -1,7 +1,7 @@
 /*
     Author	: Phumipat C.
     School	: RYW
-    Langauge: C++
+    language: C++
     Algo    : DP & Fenwick Tree
 */
 #include<bits/stdc++.h>

@@ -1,7 +1,7 @@
 /*
     Author	: Phumipat C. [MAGCARI]
     School	: RYW
-    Langauge: C++
+    language: C++
     Algo	: Implementing
 */
 #include<bits/stdc++.h>

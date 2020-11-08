@@ -1,7 +1,7 @@
 /*
     Author	: Phumipat C.
     School	: RYW
-    Langauge: C++
+    language: C++
 */
 #include<bits/stdc++.h>
 using namespace std;
