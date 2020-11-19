@@ -52,3 +52,5 @@ Gencase.cpp
 Sol.cpp
 Teach.cpp
 test.cpp
+*.tex
+_*
