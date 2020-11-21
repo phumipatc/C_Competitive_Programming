@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	: Matrix Chain
-	Status	: 
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 using namespace std;
