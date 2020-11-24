@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	: MST[Prim]
-	Status	:
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 using namespace std;

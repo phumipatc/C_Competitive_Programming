@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	: DP
-	Status	: 
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 #define MOD 9241
