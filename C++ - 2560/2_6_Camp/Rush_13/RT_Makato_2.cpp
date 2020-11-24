@@ -32,8 +32,10 @@ int main(){
     dfs(1,1);
     for(int i=1;i<=n;i++){
         sum = XOR[1]^XOR[i];
-        for(int j=0;j<g[i].size();j++)
+        for(int j=0;j<g[i].size();j++){
+			if(lv[i]>lv[g[i][j]])	continue;
             sum+=XOR[g[i][j]];
+		}
         minn = min(minn,sum);
     }
     cout << minn << endl;
