@@ -14,7 +14,6 @@ using PLL = pair<long long ,long long >;
 const int dir4[2][4] = {{1,-1,0,0},{0,0,1,-1}};
 const int dir8[2][8] = {{-1,-1,-1,0,1,1,1,0},{-1,0,1,1,-1,0,1,-1}};
 vector<LL > a,b,c,minn;
-vector<LL > matched[1030];
 LL w[10000010];
 int t[12],st[12];
 int main(){
