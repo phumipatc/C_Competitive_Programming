@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	: 
-	Status	: 
+	Algo	: Dijkstra, Observe that maximum path is n-1 edges
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 using namespace std;

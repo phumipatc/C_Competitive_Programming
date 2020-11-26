@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	: 
-	Status	: 
+	Algo	: GD
+	Status	: Finsihed
 */
 #include<bits/stdc++.h>
 using namespace std;

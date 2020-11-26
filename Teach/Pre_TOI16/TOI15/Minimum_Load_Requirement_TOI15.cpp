@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	: 
-	Status	: 
+	Algo	: Permutation, BS, Split array into k subarray with minimum sum for each subarray
+	Status	: Finsihed
 */
 #include<bits/stdc++.h>
 // #include<conio.h>
