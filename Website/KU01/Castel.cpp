@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	: 
-	Status	: 
+	Algo	: Math
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -24,20 +24,12 @@ LL maxN(vector<LL > a){
 		maxx = max(maxx,x);
 	return maxx;
 }
-int ans[100010];
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
-	int n;
-	for(int i=1,x=3,a=0;i<=100003;i+=x,x+=2,a+=2){
-		for(int j=i,y=a+2,state=0,b=a;j<=100003;){
-			ans[j] = b;
-			// if(j<=25)
-			// 	printf("%d %d\n",j,b);
-			if(!state)	j+=y,b++,y+=2,state = 1;
-			else		j--,b++,state = 0;
-		}
-	}
+	int n,st,num;
 	cin >> n;
-	cout << ans[n] << '\n';
+	num = 2*(int )sqrt(n-1)-1;
+	st = 1 + (num+1)*(num+1)/4;
+	cout << (num+1)-((n-st)%2) << '\n';
 	return 0;
 }
