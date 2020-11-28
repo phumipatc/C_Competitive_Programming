@@ -27,31 +27,22 @@ LL maxN(vector<LL > a){
 vector<int > x,y;
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
-	int w,h,m,n,sx,sy,max1 = 0,max2 = 0;
+	int w,h,m,n;
 	cin >> w >> h >> m >> n;
-	x.resize(m+2);
-	y.resize(n+2);
+	x.resize(m+2),x[++m] = w;
+	y.resize(n+2),y[++n] = h;
 	for(int i=1;i<=m;i++)
 		cin >> x[i];
-	x[0] = 0,x[++m] = w;
 	for(int i=1;i<=n;i++)
 		cin >> y[i];
-	y[0] = 0,y[++n] = h;
+	for(int i=0;i<x.size()-1;i++)
+		x[i] = x[i+1]-x[i];
+	x.pop_back();
 	sort(x.begin(),x.end());
+	for(int i=0;i<y.size()-1;i++)
+		y[i] = y[i+1]-y[i];
+	y.pop_back();
 	sort(y.begin(),y.end());
-	for(int i=0;i<x.size()-1;i++){
-		sx = x[i+1]-x[i];
-		for(int j=0;j<y.size()-1;j++){
-			sy = y[j+1]-y[j];
-			// printf("%d %d %d\n",sx,sy,sx*sy);
-			if(sx*sy>=max1){
-				max2 = max1;
-				max1 = sx*sy;
-			}else if(sx*sy>max2){
-				max2 = sx*sy;
-			}
-		}
-	}
-	cout << max1 << ' ' << max2 << '\n';
+	cout << x[m-1]*y[n-1] << ' ' << max(x[m-2]*y[n-1],x[m-1]*y[n-2]) << '\n';
 	return 0;
 }
