@@ -39,11 +39,11 @@ int main(){
 	for(int i=0;i<x.size()-1;i++)
 		x[i] = x[i+1]-x[i];
 	x.pop_back();
-	sort(all(x));
+	sort(all(x)),reverse(all(x));
 	for(int i=0;i<y.size()-1;i++)
 		y[i] = y[i+1]-y[i];
 	y.pop_back();
-	sort(all(y));
-	cout << x[m]*y[n] << ' ' << max(x[m-1]*y[n],x[m]*y[n-1]) << '\n';
+	sort(all(y)),reverse(all(y));
+	cout << x[0]*y[0] << ' ' << max(x[1]*y[0],x[0]*y[1]) << '\n';
 	return 0;
 }
