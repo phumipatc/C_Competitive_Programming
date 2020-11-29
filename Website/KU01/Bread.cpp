@@ -6,6 +6,7 @@
 	Status	: Finished
 */
 #include<bits/stdc++.h>
+#define all(x) (x).begin(),(x).end()
 using namespace std;
 using LL = long long;
 using PII = pair<int ,int >;
@@ -38,11 +39,11 @@ int main(){
 	for(int i=0;i<x.size()-1;i++)
 		x[i] = x[i+1]-x[i];
 	x.pop_back();
-	sort(x.begin(),x.end());
+	sort(all(x));
 	for(int i=0;i<y.size()-1;i++)
 		y[i] = y[i+1]-y[i];
 	y.pop_back();
-	sort(y.begin(),y.end());
+	sort(all(y));
 	cout << x[m]*y[n] << ' ' << max(x[m-1]*y[n],x[m]*y[n-1]) << '\n';
 	return 0;
 }
