@@ -29,8 +29,8 @@ int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
 	int w,h,m,n;
 	cin >> w >> h >> m >> n;
-	x.resize(m+2),x[++m] = w;
-	y.resize(n+2),y[++n] = h;
+	x.resize(m+2),x[m+1] = w;
+	y.resize(n+2),y[n+1] = h;
 	for(int i=1;i<=m;i++)
 		cin >> x[i];
 	for(int i=1;i<=n;i++)
@@ -43,6 +43,6 @@ int main(){
 		y[i] = y[i+1]-y[i];
 	y.pop_back();
 	sort(y.begin(),y.end());
-	cout << x[m-1]*y[n-1] << ' ' << max(x[m-2]*y[n-1],x[m-1]*y[n-2]) << '\n';
+	cout << x[m]*y[n] << ' ' << max(x[m-1]*y[n],x[m]*y[n-1]) << '\n';
 	return 0;
 }
