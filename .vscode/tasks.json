@@ -1,0 +1,34 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+		{
+		  "type": "shell",
+		  "label": "g++.exe build active file",
+		  "command": "C:\\Program Files\\CodeBlocks\\MinGW\\bin\\g++.exe",
+		  "args": [
+			"-g",
+			"${file}",
+			"-o",
+			"${fileDirname}\\${fileBasenameNoExtension}.exe"
+		  ],
+		  "options": {
+			"cwd": "C:\\Program Files\\CodeBlocks\\MinGW\\bin"
+		  }
+		},
+		{
+		  "type": "shell",
+		  "label": "g++ build & run active file",
+		  "command": "C:\\Program Files\\CodeBlocks\\MinGW\\bin\\g++.exe",
+		  "args": [
+			"${file}",
+			"-o",
+			"${fileDirname}\\${fileBasenameNoExtension}.exe"
+		  ],
+		  "options": {
+			"cwd": "C:\\Program Files\\CodeBlocks\\MinGW\\bin"
+		  }
+		}
+	  ]
+}

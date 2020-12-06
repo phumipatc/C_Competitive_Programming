@@ -2,7 +2,7 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	: Inclusion-Exclusion & Bitmask
+	Algo	: Inclusion-Exclusion
 	Status	: Unfinished [90 pt]
 */
 #include<bits/stdc++.h>
@@ -26,14 +26,17 @@ LL maxN(vector<LL > a){
 	return maxx;
 }
 vector<int > pf;
-int v[1000010];
 int a[1000010];
-int m;
+int m,bit;
 int sum(int now){
-	int sum = 0,bit;
+	int sum = 0,v;
 	for(int i=1;i<(1<<m);i++){
-		bit = __builtin_popcount(i);
-		sum+=(bit%2)?now/v[i]:-now/v[i];
+		v = 1;
+		for(int j=0;j<m;j++){
+			if((i&(1<<j)) == 0)	continue;
+			v*=pf[j];
+		}
+		sum+=(__builtin_popcount(i)&1)?now/v:-now/v;
 	}
 	return sum;
 }
@@ -46,7 +49,7 @@ int main(){
 		cin >> a[i];
 	
 	now = k;
-	for(int i=2;i<=sqrt(z);i++){
+	for(int i=2;i*i<=z;i++){
 		if(now%i)	continue;
 		pf.push_back(i);
 		while(now%i == 0)	now/=i;
@@ -54,12 +57,6 @@ int main(){
 	if(now!=1)	pf.push_back(now);
 	
 	m = pf.size();
-	for(int i=1;i<(1<<m);i++){
-		v[i] = 1;
-		for(int j=0;j<m;j++)
-			if(i&(1<<j))
-				v[i]*=pf[j];
-	}
 	last0 = 1,last1 = -1;
 	for(int i=2;i<=n;i++){
 		pos = sum(a[i])-sum(a[i-1]);
