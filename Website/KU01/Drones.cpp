@@ -2,7 +2,7 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	: Heap
+	Algo	: Counting
 	Status	: Finished
 */
 #include<bits/stdc++.h>
