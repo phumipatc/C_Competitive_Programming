@@ -26,24 +26,23 @@ LL maxN(vector<LL > a){
 		maxx = max(maxx,x);
 	return maxx;
 }
-int a[1010],countt[210];
-priority_queue<PII > heap;
+int a[1010],countt[410];
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
-	int n,ans = 0;
+	int n,ans = 0,now = 1;
 	cin >> n;
 	for(int i=1;i<=n;i++)
 		cin >> a[i];
 	sort(a+1,a+n+1);
 	for(int i=1;i<=200;i++)
-		heap.push({-i,i});
+		countt[i] = 1;
 	for(int i=n;i>=1;i--){
-		auto now = heap.top();
-		heap.pop();
-		// printf("%d\n",-now.first);
-		ans-=now.first*a[i];
-		countt[now.second]++;
-		if(countt[now.second]!=10)	heap.push({-now.second*2,now.second});
+		ans+=now*a[i];
+		countt[now]--;
+		if(countt[now] == 0){
+			countt[now*2]+=9;
+			now++;
+		}
 	}
 	cout << ans << '\n';
 	return 0;
