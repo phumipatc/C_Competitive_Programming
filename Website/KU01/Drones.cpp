@@ -40,7 +40,7 @@ int main(){
 		ans+=now*a[i];
 		countt[now]--;
 		if(countt[now] == 0){
-			countt[now*2]+=9;
+			if(now<=200)	countt[now*2]+=9;
 			now++;
 		}
 	}
