@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	:
-	Status	:
+	Status	: Unfinished
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -36,25 +36,35 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
+int a[300010],b[300010];
+int check(int now){
+	if(a[now]>a[now-1] && a[now]>a[now+1])	return 1;
+	if(a[now]<a[now-1] && a[now]<a[now+1])	return 1;
+	return 0;
+}
 void solve(){
-	int n,m,idx = 1;
-	LL sum = 0;
-	cin >> n >> m;
-	vector<int > a(n),b(m+1);
-	for(int i=0;i<n;i++)
+	int n,temp,sum = 0,maxx = 0,l,r,now;
+	cin >> n;
+	for(int i=1;i<=n;i++)
 		cin >> a[i];
-	sort(all(a));	reverse(all(a));
-	for(int i=1;i<=m;i++)
-		cin >> b[i];
-	for(auto x:a){
-		if(idx<=m && b[idx]<b[x]){
-			sum+=b[idx];
-			idx++;
-		}else{
-			sum+=b[x];
-		}
+	b[1] = b[n] = 0;
+	for(int i=2;i<n;i++)
+		b[i] = check(i),sum+=b[i];
+	for(int i=2;i<n;i++){
+		temp = a[i];
+		now = b[i],l = b[i-1],r = b[i+1];
+		a[i] = a[i-1];
+		maxx = max(maxx,now + l + (i+2<=n && r && check(i+1)));
+		a[i] = a[i+1];
+		maxx = max(maxx,now + r + (i-2>=1 && l && check(i-1)));
+		a[i] = 0;
+		maxx = max(maxx,now + (i-2>=1 && l && check(i-1)) + (i+2<=n && r && check(i+1)));
+		a[i] = 1e9+7;
+		maxx = max(maxx,now + (i-2>=1 && l && check(i-1)) + (i+2<=n && r && check(i+1)));
+		a[i] = temp;
+		// printf("%d %d\n",i,maxx);
 	}
-	cout << sum << '\n';
+	cout << sum-maxx << '\n';
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);

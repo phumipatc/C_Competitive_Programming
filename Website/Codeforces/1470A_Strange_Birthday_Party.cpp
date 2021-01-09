@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	: Math
-	Status	: Unfinished
+	Algo	:
+	Status	: Untested
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -36,23 +36,23 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-int max_lv,x;
-int dfs(int now,int lv){
-	if(lv>max_lv)		return 0;
-	// printf("%d %d\n",now,lv);
-	if(now%x){
-		max_lv = min(max_lv,lv);
-		return now;
-	}
-	return now + x*dfs(now/x,lv+1);
-}
 void solve(){
-	int n,num,sum = 0;
-	cin >> n >> x;
-	max_lv = 1e9;
-	for(int i=1;i<=n;i++){
-		cin >> num;
-		sum+=dfs(num,1);
+	int n,m,idx = 1;
+	LL sum = 0;
+	cin >> n >> m;
+	vector<int > a(n),b(m+1);
+	for(int i=0;i<n;i++)
+		cin >> a[i];
+	sort(all(a));	reverse(all(a));
+	for(int i=1;i<=m;i++)
+		cin >> b[i];
+	for(auto x:a){
+		if(idx<=m && b[idx]<b[x]){
+			sum+=b[idx];
+			idx++;
+		}else{
+			sum+=b[x];
+		}
 	}
 	cout << sum << '\n';
 }
