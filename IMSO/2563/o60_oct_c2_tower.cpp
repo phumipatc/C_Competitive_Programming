@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	:
-	Status	: Unfinished
+	Status	:
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -40,63 +40,54 @@ LL modN(LL a,LL b,LL c = MOD){
 	else	return (now*now)%c;
 }
 struct A{
-	int l,r,maxx,cnt;
+	int mx,cnt,l,r;
 };
 A tree[800010];
-int lazy[800010];
 void build(int l,int r,int now){
 	if(l == r){
-		tree[now] = {0,0,0,1};
+		tree[now].cnt = 1;
 		return ;
 	}
 	int mid = (l+r)/2;
-	build(l,mid,nl);
-	build(mid+1,r,nr);
-	tree[now] = {0,0,0,r-l+1};
+	build(l,mid,now*2);	build(mid+1,r,now*2+1);
+	tree[now].cnt = 1;
 }
+int lazy[800010];
 void upd(int l,int r,int now,int ll,int rr,int v){
 	if(lazy[now]){
+		tree[now].mx+=lazy[now];
 		tree[now].l+=lazy[now];
 		tree[now].r+=lazy[now];
-		tree[now].maxx+=lazy[now];
-		if(l!=r){
-			lazy[nl]+=lazy[now];
-			lazy[nr]+=lazy[now];
-		}
+		if(l!=r)	lazy[now*2]+=lazy[now],lazy[now*2+1]+=lazy[now];
 		lazy[now] = 0;
 	}
-	if(ll>r || rr<l)	return ;
-	if(ll<=l && r<=rr){
-		tree[now].maxx+=v;
+	if(l>rr or r<ll)	return ;
+	if(ll<=l and r<=rr){
+		tree[now].mx+=v;
 		tree[now].l+=v;
 		tree[now].r+=v;
-		if(l!=r){
-			lazy[nl]+=v;
-			lazy[nr]+=v;
-		}
+		if(l!=r)	lazy[now*2]+=v,lazy[now*2+1]+=v;
 		return ;
 	}
 	int mid = (l+r)/2;
-	upd(l,mid,nl,ll,rr,v);
-	upd(mid+1,r,nr,ll,rr,v);
-	if(tree[nl].maxx>tree[nr].maxx)			tree[now] = tree[nl];
-	else if(tree[nr].maxx>tree[nl].maxx)	tree[now] = tree[nr];
+	upd(l,mid,now*2,ll,rr,v);	upd(mid+1,r,now*2+1,ll,rr,v);
+	A tl = tree[now*2],tr = tree[now*2+1];
+	// printf("%d %d (%d,%d) (%d,%d)\n",l,r,tl.mx,tl.cnt,tr.mx,tr.cnt);
+	if(tl.mx>tr.mx)			tree[now] = tl,tree[now].r = tr.r;
+	else if(tl.mx<tr.mx)	tree[now] = tr,tree[now].l = tl.l;
 	else{
-		tree[now] = tree[nl];
-		tree[now].cnt+=tree[nr].cnt;
-		if(tree[nl].r == tree[nr].l && tree[nl].r == tree[now].maxx)	tree[now].cnt--;
+		tree[now] = {tl.mx,tl.cnt + tr.cnt,tl.l,tr.r};
+		if(tl.r == tr.l and tl.r == tl.mx)	tree[now].cnt--;
 	}
-	tree[now].l = tree[nl].l,tree[now].r = tree[nr].r;
-	// printf("%d %d: %d %d %d %d\n",l,r,tree[now].l,tree[now].r,tree[now].maxx,tree[now].cnt);
 }
 void solve(){
-	int n,m,u,v,w;
+	int n,m,a,b,x;
 	cin >> n >> m;
 	build(1,n,1);
 	while(m--){
-		cin >> u >> v >> w;
-		upd(1,n,1,u,v,w);
-		cout << tree[1].maxx << ' ' << tree[1].cnt << '\n';
+		cin >> a >> b >> x;
+		upd(1,n,1,a,b,x);
+		cout << tree[1].mx << ' ' << tree[1].cnt << '\n';
 	}
 }
 int main(){
