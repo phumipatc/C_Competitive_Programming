@@ -10,8 +10,6 @@
 #define allst(x,y) (x).begin()+y,(x).end()
 #define decp(x) fixed << setprecision(x)
 #define MOD (LL )(1e9+7)
-#define nl now*2
-#define nr now*2+1
 using namespace std;
 using LL = long long;
 using PII = pair<int ,int >;
