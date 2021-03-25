@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	: Implementing (ดักเคสวงกลมเล็กซ้อนใหญ่)
-	Status	: Finished
+	Algo	:
+	Status	:
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -37,25 +37,24 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
+char a[1010];
 void solve(){
-	int n;
-	cin >> n;
-	for(int i=1;i<=2*n+1;i++){
-		for(int j=1;j<=i;j++){
-			if(j == 1 || i&1)	cout << '*';
-			else				cout << '-';
-		}
-		for(int j=2*n+1-i;j>=1;j--){
-			if(i == 1 || j&1)	cout << '*';
-			else				cout << '-';
-		}
-		cout << '\n';
+	int n,k,m;
+	scanf(" %s %d %d",a+1,&n,&k);
+	k%=n;
+	m = strlen(a+1)/n;
+	for(int i=0;i<m;i++){
+		for(int j=n*(i+1)-k+1;j<=n*(i+1);j++)
+			printf("%c",a[j]);
+		for(int j=n*i+1;j<n*(i+1)-k+1;j++)
+			printf("%c",a[j]);
 	}
+	printf("\n");
 }
 int main(){
-	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
+	// ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
 	int q = 1;
-	cin >> q;
+	scanf("%d",&q);
 	for(int Q=1;Q<=q;Q++){
 		// cout << "Case #" << Q << ": ";
 		solve();

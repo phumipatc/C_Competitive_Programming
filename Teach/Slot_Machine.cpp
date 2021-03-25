@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	: Implementing (ดักเคสวงกลมเล็กซ้อนใหญ่)
-	Status	: Finished
+	Algo	:
+	Status	:
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -37,25 +37,42 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
+int a[20][10];
+struct A{
+	int i,j,k,l,m;
+};
+queue<A > que;
 void solve(){
-	int n;
+	int n,mn,mx;
 	cin >> n;
-	for(int i=1;i<=2*n+1;i++){
-		for(int j=1;j<=i;j++){
-			if(j == 1 || i&1)	cout << '*';
-			else				cout << '-';
+	for(int i=1;i<=n;i++)
+		for(int j=1;j<=5;j++)
+			cin >> a[i][j];
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+			for(int k=1;k<=n;k++){
+				for(int l=1;l<=n;l++){
+					for(int m=1;m<=n;m++){
+						mn = minN({a[i][1],a[j][2],a[k][3],a[l][4],a[m][5]});
+						mx = maxN({a[i][1],a[j][2],a[k][3],a[l][4],a[m][5]});
+						if(mn == mx)
+							que.push({i,j,k,l,m});
+					}
+				}
+			}
 		}
-		for(int j=2*n+1-i;j>=1;j--){
-			if(i == 1 || j&1)	cout << '*';
-			else				cout << '-';
-		}
-		cout << '\n';
+	}
+	cout << que.size() << '\n';
+	while(!que.empty()){
+		A now = que.front();
+		que.pop();
+		cout << now.i << ' ' << now.j << ' ' << now.k << ' ' << now.l << ' ' << now.m << '\n';
 	}
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
 	int q = 1;
-	cin >> q;
+	// cin >> q;
 	for(int Q=1;Q<=q;Q++){
 		// cout << "Case #" << Q << ": ";
 		solve();
