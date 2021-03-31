@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	:
-	Status	: Unginished [Wrong in negative weight case]
+	Status	: Unfinished
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -37,48 +37,37 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-int x,y;
-int check(string a,string b){
-	int sum = 0;
-	// cout << a << ' ' << b << '\n';
-	if(a == "CJ")		sum+=x;
-	else if(a == "JC")	sum+=y;
-	if(b == "CJ")		sum+=x;
-	else if(b == "JC")	sum+=y;
-	return sum;
-}
+int a[100][100];
 void solve(){
-	int minn = 0;
-	string a,l,r,ll,rr,J = "J",C = "C";
-	cin >> x >> y >> a;
-	int len = a.length();
-	a.push_back('0');
-	reverse(all(a));
-	a.push_back('0');
-	reverse(all(a));
-	for(int i=1;i<=len;i++){
-		if(a[i]!='?'){
-			minn+=check(a.substr(i-1,2),"00");
+	int n,sum = 0;
+	PII now = {1,1};
+	cin >> n;
+	n-=30;
+	for(int i=0;i<=30 && sum<=n+30;i++){
+		if(!((1<<i)&n)){
+			sum++;
+			cout << i << ' ' << now.second << '\n';
+			if(now.second != 1)	now.second++;
 			continue;
 		}
-		// cout << a[i-1]+J << '\n';
-		if(a[i] == '?' && a[i+1]!='?'){
-			minn+=min(check(a[i-1]+J,J+a[i+1]),check(a[i-1]+C,C+a[i+1]));
-			// printf("%d\n",minn);
-			continue;
+		sum += (1<<i);
+		if(now.second == 1){
+			for(int j=1;j<=i;j++)
+				cout << i << ' ' << j << '\n';
+			now.second = i + 1;
+		}else{
+
 		}
-		l = a[i-1];
-		int num = 1;
-		while(i<=len && a[i+1] == '?')	i++,num++;
-		r = a[i+1];
-		minn+=minN({check(l+J,J+r),check(l+J,C+r)+y,check(l+C,J+r)+x,check(l+C,C+r)});
-		// printf("%d\n",minn);
 	}
-	cout << minn << '\n';
 }
 int main(){
-	freopen("0.out","w",stdout);
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
+	for(int i=1;i<=100;i++){
+		a[i][1] = a[i][i] = 1;
+		for(int j=2;j<i;j++){
+			a[i][j] = a[i-1][j-1] + a[i-1][j];
+		}
+	}
 	int q = 1;
 	cin >> q;
 	for(int Q=1;Q<=q;Q++){
