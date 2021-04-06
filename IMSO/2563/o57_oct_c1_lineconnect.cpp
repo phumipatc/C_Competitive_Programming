@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	:
-	Status	: Unfinished [2T in evaluator]
+	Status	:
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -37,52 +37,41 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-int q = 1;
-int n,m;
-vector<int > shop[120010],cus[120010];
-int mark[120010];
-int vs[120010],vc[120010];
-void initial(){
-	cin >> n >> m;
-	cin >> q;
-	int sq = sqrt(n+m);
-	for(int i=1,num,id;i<=m;i++){
-		cin >> num;
-		if(num<=sq){
-			mark[i] = 1;
-			while(num--){
-				cin >> id;
-				shop[i].push_back(id);
-			}
-		}else{
-			while(num--){
-				cin >> id;
-				cus[id].push_back(i);
-			}
-		}
-	}
+int pos[100010];
+int p[100010];
+int fr(int u){
+	return (u == p[u])?u:p[u] = fr(p[u]);
 }
+vector<int > a,b;
 void solve(){
-	int opr,id,v;
-	cin >> opr;
-	if(opr ==  1){
-		cin >> id >> v;
-		if(mark[id]){
-			for(auto x:shop[id])
-				vc[x]+=v-vs[id];
-		}
-		vs[id] = v;
-	}else{
-		cin >> id;
-		int ans = vc[id];
-		for(auto x:cus[id])
-			ans+=vs[x];
-		cout << ans << '\n';
+	int n,u,v,ru,rv;
+	cin >> n;
+	for(int i=1;i<=n;i++)
+		cin >> pos[i],p[i] = i;
+	for(int i=1;i<=n-2;i++){
+		cin >> u >> v;
+		ru = fr(u),rv = fr(v);
+		if(ru == rv)	continue;
+		p[ru] = rv;
 	}
+	int minn = fr(1),idx;
+	for(int i=1;i<=n;i++){
+		if(fr(i) == minn)	a.push_back(pos[i]);
+		else				b.push_back(pos[i]);
+	}
+	sort(all(a)),sort(all(b));
+	minn = MAX_INT;
+	for(auto x:a){
+		idx = upper_bound(all(b),x)-b.begin();
+		minn = minN({minn,abs(b[idx]-x),abs(x-b[max(0,idx-1)])});
+		// printf("%d %d\n",abs(b[idx]-x),abs(x-b[max(0,idx-1)]));
+	}
+	cout << minn << '\n';
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
-	initial();
+	int q = 1;
+	// cin >> q;
 	for(int Q=1;Q<=q;Q++){
 		// cout << "Case #" << Q << ": ";
 		solve();

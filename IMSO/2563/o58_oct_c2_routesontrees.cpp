@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	:
-	Status	: Unfinished [2T in evaluator]
+	Status	:
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -37,52 +37,50 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-int q = 1;
-int n,m;
-vector<int > shop[120010],cus[120010];
-int mark[120010];
-int vs[120010],vc[120010];
-void initial(){
-	cin >> n >> m;
-	cin >> q;
-	int sq = sqrt(n+m);
-	for(int i=1,num,id;i<=m;i++){
-		cin >> num;
-		if(num<=sq){
-			mark[i] = 1;
-			while(num--){
-				cin >> id;
-				shop[i].push_back(id);
-			}
-		}else{
-			while(num--){
-				cin >> id;
-				cus[id].push_back(i);
-			}
-		}
+struct A{
+	int v,w,k;
+	bool operator < (const A&o) const{
+		return w>o.w;
 	}
+};
+priority_queue<A > heap;
+vector<PII > g[100010];
+int dis[100010][7];
+int cal(int n,int v){
+	return (v < -100)?n+1:n;
 }
 void solve(){
-	int opr,id,v;
-	cin >> opr;
-	if(opr ==  1){
-		cin >> id >> v;
-		if(mark[id]){
-			for(auto x:shop[id])
-				vc[x]+=v-vs[id];
-		}
-		vs[id] = v;
-	}else{
-		cin >> id;
-		int ans = vc[id];
-		for(auto x:cus[id])
-			ans+=vs[x];
-		cout << ans << '\n';
+	int n,m,k,u,v,w;
+	cin >> n >> m >> k;
+	while(m--){
+		cin >> u >> v >> w;
+		g[u].push_back({v,w});
 	}
+	for(int i=1;i<=n;i++)
+		for(int j=0;j<=k;j++)
+			dis[i][j] = 1e9;
+	dis[1][0] = 0;
+	heap.push({1,0,0});
+	while(!heap.empty()){
+		A now = heap.top();
+		heap.pop();
+		if(now.v == n){
+			cout << now.w;
+			return ;
+		}
+		for(auto x:g[now.v]){
+			if(cal(now.k,x.second)>k)										continue;
+			if(dis[x.first][cal(now.k,x.second)]<=now.w+max(0,x.second))	continue;
+			dis[x.first][cal(now.k,x.second)] = now.w+max(0,x.second);
+			heap.push({x.first,now.w+max(0,x.second),cal(now.k,x.second)});
+		}
+	}
+	cout << "-1\n";
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
-	initial();
+	int q = 1;
+	// cin >> q;
 	for(int Q=1;Q<=q;Q++){
 		// cout << "Case #" << Q << ": ";
 		solve();
