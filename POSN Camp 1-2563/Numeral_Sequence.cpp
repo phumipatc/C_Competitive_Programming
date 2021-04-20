@@ -37,23 +37,23 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-PII dp[110];
+LL a[12],last[12],p[12];
 void solve(){
-	int n,k;
-	cin >> n >> k;
-	dp[0] = {0,0};
-	for(int i=1;i<=k;i++)
-		dp[i] = {1e9,1e9};
-	for(int i=1,num;i<=k;i++){
-		cin >> num;
-		if(num == -1)	continue;
-		for(int j=i;j<=k;j++){
-			// if(dp[j-i].second+1>n)				continue;
-			if(dp[j].first<=dp[j-i].first+num)	continue;
-			dp[j] = {dp[j-i].first+num,dp[j-i].second+1};
-		}
+	int n;
+	cin >> n;
+	p[0] = 1;
+	for(int i=1;i<=9;i++){
+		a[i] = 9*p[i-1]*i+a[i-1];
+		last[i] = last[i-1]*10 + 9;
+		p[i] = p[i-1]*10;
 	}
-	cout << (dp[k].second == 1e9?-1:dp[k].first) << '\n';
+	int idx = lower_bound(a+1,a+10,n)-a;
+	n-=a[idx-1];
+	LL now = last[idx-1]+ceil((double )n/idx);
+	// printf("%lld %d %d %d ",now,idx,n,p[idx-n]);
+	n%=idx;
+	if(!n)	n = idx;
+	cout << (now/p[idx-n])%10 << '\n';
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
@@ -65,3 +65,19 @@ int main(){
 	}
 	return 0;
 }
+/*
+5
+60000
+5490
+45789
+32567
+4896
+1
+1
+9
+4
+1
+
+30
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+*/

@@ -37,28 +37,15 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-PII dp[110];
 void solve(){
-	int n,k;
-	cin >> n >> k;
-	dp[0] = {0,0};
-	for(int i=1;i<=k;i++)
-		dp[i] = {1e9,1e9};
-	for(int i=1,num;i<=k;i++){
-		cin >> num;
-		if(num == -1)	continue;
-		for(int j=i;j<=k;j++){
-			// if(dp[j-i].second+1>n)				continue;
-			if(dp[j].first<=dp[j-i].first+num)	continue;
-			dp[j] = {dp[j-i].first+num,dp[j-i].second+1};
-		}
-	}
-	cout << (dp[k].second == 1e9?-1:dp[k].first) << '\n';
+	int n,m;
+	cin >> n >> m;
+	cout << round(n/pow(10,m))*pow(10,m);
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
 	int q = 1;
-	cin >> q;
+	// cin >> q;
 	for(int Q=1;Q<=q;Q++){
 		// cout << "Case #" << Q << ": ";
 		solve();

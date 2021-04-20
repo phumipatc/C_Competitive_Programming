@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	:
-	Status	:
+	Algo	: DFS + Observe [If we travel down 1.get nearer to children nodes(cnt[x]) 2.get further to other nodes(n-cnt[x])]
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -37,28 +37,42 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-PII dp[110];
-void solve(){
-	int n,k;
-	cin >> n >> k;
-	dp[0] = {0,0};
-	for(int i=1;i<=k;i++)
-		dp[i] = {1e9,1e9};
-	for(int i=1,num;i<=k;i++){
-		cin >> num;
-		if(num == -1)	continue;
-		for(int j=i;j<=k;j++){
-			// if(dp[j-i].second+1>n)				continue;
-			if(dp[j].first<=dp[j-i].first+num)	continue;
-			dp[j] = {dp[j-i].first+num,dp[j-i].second+1};
-		}
+vector<int > g[100010];
+int cnt[100010];
+LL minn;
+void dfs(int u,int p,int lv = 0){
+	minn+=lv;
+	cnt[u] = 1;
+	for(auto x:g[u]){
+		if(x == p)	continue;
+		dfs(x,u,lv+1);
+		cnt[u]+=cnt[x];
 	}
-	cout << (dp[k].second == 1e9?-1:dp[k].first) << '\n';
+}
+int n;
+void dfs2(int u,int p,LL sum){
+	minn = min(minn,sum);
+	for(auto x:g[u]){
+		if(x == p)	continue;
+		dfs2(x,u,sum+(n-cnt[x])-cnt[x]);
+	}
+}
+void solve(){
+	int u,v;
+	cin >> n;
+	for(int i=1;i<n;i++){
+		cin >> u >> v;
+		g[u].push_back(v);
+		g[v].push_back(u);
+	}
+	dfs(1,0);
+	dfs2(1,0,minn);
+	cout << minn << '\n';
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
 	int q = 1;
-	cin >> q;
+	// cin >> q;
 	for(int Q=1;Q<=q;Q++){
 		// cout << "Case #" << Q << ": ";
 		solve();

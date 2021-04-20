@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	:
-	Status	:
+	Algo	: Math [Base number]
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -37,23 +37,38 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-PII dp[110];
+LL p(int x,int n){
+	LL ret = 1;
+	for(int i=1;i<=n;i++)
+		ret*=x;
+	return ret;
+}
 void solve(){
-	int n,k;
-	cin >> n >> k;
-	dp[0] = {0,0};
-	for(int i=1;i<=k;i++)
-		dp[i] = {1e9,1e9};
-	for(int i=1,num;i<=k;i++){
-		cin >> num;
-		if(num == -1)	continue;
-		for(int j=i;j<=k;j++){
-			// if(dp[j-i].second+1>n)				continue;
-			if(dp[j].first<=dp[j-i].first+num)	continue;
-			dp[j] = {dp[j-i].first+num,dp[j-i].second+1};
-		}
+	int a,b,sum = 0,n;
+	string str;
+	cin >> a >> b >> str;
+	n = str.length()-1;
+	for(auto x:str){
+		if(isdigit(x))	sum+=(x-'0')*p(a,n);
+		else			sum+=(x-'A'+10)*p(a,n);
+		n--;
 	}
-	cout << (dp[k].second == 1e9?-1:dp[k].first) << '\n';
+	// cout << sum << '\n';
+
+	vector<char > ans;
+	n = 0;
+	while(p(b,n)<=sum)	n++;
+	while(n--){
+		int now = p(b,n);
+		ans.push_back((sum/now)<10?(sum/now)+'0':(sum/now)-10+'A'),sum%=now;
+	}
+	reverse(all(ans));
+	while(!ans.empty() && ans.back() == '0')	ans.pop_back();
+	reverse(all(ans));
+
+	for(auto x:ans)
+		cout << x;
+	cout << '\n';
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);

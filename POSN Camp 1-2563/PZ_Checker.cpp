@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	:
-	Status	:
+	Algo	: Recursive
+	Status	: Untest
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -37,23 +37,50 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-PII dp[110];
+char a[32][32];
+const int dir[2][4] = {{-1,-1,1,1},{-1,1,-1,1}};
+int cnt;
+vector<PII > ans;
+int n;
+int recurse(int i,int j){
+	if(cnt == 0){
+		for(auto x:ans)
+			cout << x.first << ' ' << x.second << '\n';
+		return 1;
+	}
+	for(int k=0;k<4;k++){
+		int ni = i+dir[0][k],nj = j+dir[1][k];
+		int nii = ni+dir[0][k],njj = nj+dir[1][k];
+		if(nii<1 || njj<1 || nii>n || njj>n)	continue;
+		if(a[ni][nj] != 'o')					continue;
+		if(a[nii][njj] != '+')					continue;
+		a[ni][nj] = '+';
+		cnt--;
+		ans.push_back({nii,njj});
+		if(recurse(nii,njj))	return 1;
+		ans.pop_back();
+		cnt++;
+		a[ni][nj] = 'o';
+	}
+	return 0;
+}
 void solve(){
-	int n,k;
-	cin >> n >> k;
-	dp[0] = {0,0};
-	for(int i=1;i<=k;i++)
-		dp[i] = {1e9,1e9};
-	for(int i=1,num;i<=k;i++){
-		cin >> num;
-		if(num == -1)	continue;
-		for(int j=i;j<=k;j++){
-			// if(dp[j-i].second+1>n)				continue;
-			if(dp[j].first<=dp[j-i].first+num)	continue;
-			dp[j] = {dp[j-i].first+num,dp[j-i].second+1};
+	cin >> n;
+	cnt = 0;
+	for(int i=1;i<=n;i++){
+		cin >> a[i]+1;
+		for(int j=1;j<=n;j++)
+			cnt+=(a[i][j] == 'o');
+	}
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+			if(a[i][j]!='K')	continue;
+			ans.clear();
+			ans.push_back({i,j});
+			if(recurse(i,j) == 1)	return ;
 		}
 	}
-	cout << (dp[k].second == 1e9?-1:dp[k].first) << '\n';
+	cout << "impossible\n";
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
@@ -65,3 +92,22 @@ int main(){
 	}
 	return 0;
 }
+/*
+2
+8
+-+-+-+-+
++-+-+-+-
+-+-K-+-+
++-+-+-+-
+-o-o-+-+
++-K-+-+-
+-o-+-+-+
++-K-+-K-
+6
+-o-K-+
++-+-+-
+-+-o-+
++-K-+-
+-+-o-+
++-K-+-
+*/

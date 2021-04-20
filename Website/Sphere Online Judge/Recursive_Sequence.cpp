@@ -9,7 +9,7 @@
 #define all(x) (x).begin(),(x).end()
 #define allst(x,y) (x).begin()+y,(x).end()
 #define decp(x) fixed << setprecision(x)
-#define MOD (LL )(1e9+7)
+#define MOD (LL )(1e9)
 using namespace std;
 using LL = long long;
 using PII = pair<int ,int >;
@@ -37,23 +37,27 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-PII dp[110];
-void solve(){
-	int n,k;
-	cin >> n >> k;
-	dp[0] = {0,0};
-	for(int i=1;i<=k;i++)
-		dp[i] = {1e9,1e9};
-	for(int i=1,num;i<=k;i++){
-		cin >> num;
-		if(num == -1)	continue;
-		for(int j=i;j<=k;j++){
-			// if(dp[j-i].second+1>n)				continue;
-			if(dp[j].first<=dp[j-i].first+num)	continue;
-			dp[j] = {dp[j-i].first+num,dp[j-i].second+1};
+struct A{
+	int a[10][10];
+	A operator * (const A&o) const{
+		A temp;
+		for(int i=0;i<10;i++){
+			for(int j=0;j<10;j++){
+				temp.a[i][j] = 0;
+				for(int k=0;k<10;k++)
+					temp.a[i][j]+=a[i][k]*o.a[k][j],temp.a[i][j]%=MOD;
+			}
 		}
 	}
-	cout << (dp[k].second == 1e9?-1:dp[k].first) << '\n';
+}p[32],now;
+void solve(){
+	int k;
+	cin >> k;
+	for(int i=1;i<=k;i++)
+		cin >> now.a[0][i];
+	for(int i=1;i<=k;i++){
+		cin >>
+	}
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);

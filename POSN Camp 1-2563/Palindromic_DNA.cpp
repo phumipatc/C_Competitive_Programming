@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	:
-	Status	:
+	Algo	: Bruteforce
+	Status	: Untest
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()
@@ -37,23 +37,43 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-PII dp[110];
+string str;
+char mark[30];
+vector<pair<int ,string > > ans;
+int check(int l,int r){
+	while(l<=r){
+		if(mark[str[l]-'A']!=str[r])	return 0;
+		l++,r--;
+	}
+	return 1;
+}
 void solve(){
-	int n,k;
-	cin >> n >> k;
-	dp[0] = {0,0};
-	for(int i=1;i<=k;i++)
-		dp[i] = {1e9,1e9};
-	for(int i=1,num;i<=k;i++){
-		cin >> num;
-		if(num == -1)	continue;
-		for(int j=i;j<=k;j++){
-			// if(dp[j-i].second+1>n)				continue;
-			if(dp[j].first<=dp[j-i].first+num)	continue;
-			dp[j] = {dp[j-i].first+num,dp[j-i].second+1};
+	mark['A'-'A'] = 'T',mark['T'-'A'] = 'A';
+	mark['C'-'A'] = 'G',mark['G'-'A'] = 'C';
+	cin >> str;
+	ans.clear();
+	int maxx = 0;
+	for(int i=0;i<str.length();i++){
+		for(int j=str.length()-1;j>=i;j--){
+			if(!check(i,j))	continue;
+			if(j-i+1>maxx){
+				maxx = j-i+1;
+				ans.clear();
+			}
+			if(j-i+1 == maxx)	ans.push_back({i+1,str.substr(i,maxx)});
 		}
 	}
-	cout << (dp[k].second == 1e9?-1:dp[k].first) << '\n';
+	if(ans.empty()){
+		cout << "No palindromic sequence found\n";
+		return ;
+	}
+	cout << maxx << '\n' << ans.size() << '\n';
+	for(auto x:ans){
+		cout << x.first << '\n' << x.second << '\n';
+		for(auto y:x.second)
+			cout << mark[y-'A'];
+		cout << '\n';
+	}
 }
 int main(){
 	ios_base::sync_with_stdio(0);	cin.tie(0),cout.tie(0);
