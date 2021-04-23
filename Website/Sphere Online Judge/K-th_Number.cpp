@@ -84,7 +84,7 @@ void solve(){
 		ver[i] = upd(1,n,tree[ver[i-1]],a[i],1);
 	while(m--){
 		cin >> i >> j >> k;
-		cout << v[query(1,n,tree[ver[i-1]],tree[ver[j]],k)] << '\n';
+		cout << v[query(1,n	,tree[ver[i-1]],tree[ver[j]],k)] << '\n';
 	}
 }
 int main(){
