@@ -19,7 +19,7 @@ const int dir8[2][8] = {{-1,-1,-1,0,1,1,1,0},{-1,0,1,1,-1,0,1,-1}};
 const int MAX_INT = 1e9;
 const LL MAX_LL = 1e18;
 LL modN(LL a,LL b,LL c = MOD){
-	if(b == 0)	return 0;
+	if(b == 0)	return 1;
 	if(b == 1)	return a%c;
 	LL now = modN(a,b/2);
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
