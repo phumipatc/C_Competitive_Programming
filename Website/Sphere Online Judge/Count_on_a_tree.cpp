@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	:
-	Status	:
+	Algo	: Persistent Segment Tree
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 #define rep(i, a, b) for(int i = a; i < (b); ++i)

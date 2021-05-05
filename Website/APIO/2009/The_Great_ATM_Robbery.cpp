@@ -4,8 +4,8 @@
 	School	: RYW
 	Language: C++
 	Created	: 01 May 2021 [08:02]
-	Algo	:
-	Status	:
+	Algo	: SCC
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 #define rep(i, a, b) for(int i = a; i < (b); ++i)

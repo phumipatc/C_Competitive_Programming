@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	:
-	Status	: Untested
+	Status	: Untest
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()

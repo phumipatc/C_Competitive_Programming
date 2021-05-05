@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	:
-	Status	:
+	Algo	: Pascal Triangle, Math
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 #define all(x) (x).begin(),(x).end()

@@ -2,8 +2,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	:
-	Status	:
+	Algo	: 2-Pointer
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 #define all(x) begin(x),end(x)

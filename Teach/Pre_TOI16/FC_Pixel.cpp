@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	: Divide & Conquer
-	Status	: 
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -42,7 +42,7 @@ int divide(PII a,PII b,int logn){
     minn=min(minn,divide({a.first,mj+1},{mi,b.second},logn-1)+divide({mi+1,a.second},{b.first,mj},logn-1)+qs4+(sizee-qs1));
     minn=min(minn,divide({a.first,a.second},{mi,mj},logn-1)+divide({mi+1,a.second},{b.first,mj},logn-1)+qs4+(sizee-qs2));
     minn=min(minn,divide({a.first,a.second},{mi,mj},logn-1)+divide({a.first,mj+1},{mi,b.second},logn-1)+qs4+(sizee-qs3));
-	
+
 	return dp[a.first][a.second][logn] = minn;
 }
 int main(){
