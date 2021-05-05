@@ -31,15 +31,15 @@ LL modN(LL a,LL b,LL c = MOD){
 }
 const int N = 100010;
 const int K = 205;
-LL a[N],dp[K][N];
+LL a[N],dp[2][N];
 int div_point[K][N];
 void compute(int l,int r,int optl,int optr,int state){
 	if(l>r)	return ;
 	int mid = (l+r)/2;
 	PLL ret = {-1,-1};
 	for(int k=optl;k<=optr && k<mid;k++)
-		ret = max(ret,{dp[state-1][k] + ((a[mid]-a[k])*a[k]),k});
-	dp[state][mid] = ret.first,div_point[state][mid] = ret.second;
+		ret = max(ret,{dp[!(state&1)][k] + ((a[mid]-a[k])*a[k]),k});
+	dp[state&1][mid] = ret.first,div_point[state][mid] = ret.second;
 	compute(l,mid-1,optl,ret.second,state);
 	compute(mid+1,r,ret.second,optr,state);
 }
@@ -50,7 +50,7 @@ void solve(){
 		cin >> a[i],a[i]+=a[i-1];
 	rep(i,1,k+1)
 		compute(1,n,1,n,i);
-	cout << dp[k][n] << '\n';
+	cout << dp[k&1][n] << '\n';
 	int pos = n;
 	vector<int > ans;
 	while(k){
