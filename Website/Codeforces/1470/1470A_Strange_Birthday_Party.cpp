@@ -2,7 +2,7 @@
 	Author	: Phumipat C. [MAGCARI]
 	School	: RYW
 	Language: C++
-	Algo	:
+	Algo	: Greedy
 	Status	: Untest
 */
 #include<bits/stdc++.h>
