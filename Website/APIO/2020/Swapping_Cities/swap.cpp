@@ -3,8 +3,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	Language: C++
 	Created	: 13 May 2021 [12:22]
-	Algo	: 
-	Status	: 
+	Algo	: Tree LCA DP
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 #include "swap.h"
