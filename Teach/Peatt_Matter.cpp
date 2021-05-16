@@ -1,10 +1,10 @@
 /*
-	Task	: PN_Fruit
+	Task	: Peatt_Matter
 	Author	: Phumipat C. [MAGCARI]
 	Language: C++
-	Created	: 16 May 2021 [13:41]
-	Algo	: QS & LIS
-	Status	: Untest
+	Created	: 16 May 2021 [20:49]
+	Algo	: 
+	Status	: 
 */
 #include<bits/stdc++.h>
 #define rep(i, a, b) for(int i = a; i < (b); ++i)
@@ -27,21 +27,28 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-const int N = 100010;
-LL a[N],LIS[N];
+const int N = 110;
+int dp[30010][N],a[N];
 void solve(){
-	int n;
+	memset(dp,0,sizeof dp);
+	int n,sum = 0;
 	cin >> n;
 	rep(i,1,n+1)
-		cin >> a[i],a[i]+=a[i-1];
-	int mx = 0;
+		cin >> a[i],a[i]+=101;
+	sum = accumulate(a+1,a+n+1,0);
+	dp[0][0] = 1;
 	rep(i,1,n+1){
-		if(a[i]<0)	continue;
-		int idx = lower_bound(LIS,LIS+mx,a[i])-LIS;
-		if(idx == mx)	mx++;
-		LIS[idx] = a[i];
+		for(int j=sum/2;j>=a[i];j--)
+			rep(k,1,n/2+1)
+				if(dp[j-a[i]][k-1])
+					dp[j][k] = 1;
 	}
-	cout << mx << '\n';
+	int ans = sum;
+	rep(i,0,sum/2+1){
+		if(!dp[i][n/2])	continue;
+		ans = min(ans,abs(i-(sum-i)));
+	}
+	cout << ans << '\n';
 }
 int main(){
 	cin.tie(0)->sync_with_stdio(0);
