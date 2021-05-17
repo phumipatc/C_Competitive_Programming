@@ -3,8 +3,8 @@
 	Author	: Phumipat C. [MAGCARI]
 	Language: C++
 	Created	: 17 May 2021 [13:53]
-	Algo	: DP
-	Status	: Finished
+	Algo	: DP + Opt
+	Status	: Finished [Coincidence]
 */
 #include<bits/stdc++.h>
 #define rep(i, a, b) for(int i = a; i <= (b); ++i)
