@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	: Permutation, BS, Split array into k subarray with minimum sum for each subarray
-	Status	: Finsihed
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 // #include<conio.h>

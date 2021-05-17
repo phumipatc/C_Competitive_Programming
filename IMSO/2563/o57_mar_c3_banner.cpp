@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	: Divide & Conquer
-	Status	: Finsihed
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 #define all(x) begin(x),end(x)

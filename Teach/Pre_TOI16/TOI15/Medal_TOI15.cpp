@@ -3,7 +3,7 @@
 	School	: RYW
 	Language: C++
 	Algo	: GD
-	Status	: Finsihed
+	Status	: Finished
 */
 #include<bits/stdc++.h>
 using namespace std;
