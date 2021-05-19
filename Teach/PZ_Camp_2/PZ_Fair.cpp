@@ -1,13 +1,14 @@
 /*
-	Task	: PN_Lucky
+	Task	: PZ_Fair
 	Author	: Phumipat C. [MAGCARI]
 	Language: C++
-	Created	: 13 May 2021 [19:59]
-	Algo	: Dijkstra K-state
-	Status	: 90 pt [WA First Case]
+	Created	: 17 May 2021 [23:20]
+	Algo	: Dijkstra
+	Status	: Finished
 */
 #include<bits/stdc++.h>
-#define rep(i, a, b) for(int i = a; i < (b); ++i)
+#define rep(i, a, b) for(int i = a; i <= (b); ++i)
+#define repr(i, a, b) for(int i = a; i >= (b); --i)
 #define all(x) begin(x),end(x)
 #define allst(x,y) (x).begin()+y,(x).end()
 #define rmdup(x) (x).resize(unique((x).begin(),(x).end())-(x).begin())
@@ -27,46 +28,65 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
+const int K = 110;
 const int N = 50010;
 struct A{
-	int v,w,state;
+	int v,w;
 	bool operator < (const A&o) const{
 		return w>o.w;
 	}
 };
-vector<PII > g[N];
-int dis[N][32],val[N];
+vector<A > g[N];
+int dis[K][N],id[N];
+vector<int > node[K];
 void solve(){
-	int n,m,l,st,en;
-	cin >> n >> m >> l >> st >> en;
-	rep(i,1,n+1)	cin >> val[i];
+	int n,m,a;
+	cin >> n >> m >> a;
+	rep(i,1,n){
+		cin >> id[i];
+		node[id[i]].push_back(i);
+	}
+	int u,v,w;
 	while(m--){
-		int u,v,w;
 		cin >> u >> v >> w;
 		g[u].push_back({v,w});
+		g[v].push_back({u,w});
 	}
-	rep(i,1,n+1)	rep(j,1,l+2)	dis[i][j] = 2e9;
 	priority_queue<A > heap;
-	dis[st][1] = 0;
-	heap.push({st,0,1});
-	while(!heap.empty()){
-		A now = heap.top();
-		heap.pop();
-		if(dis[now.v][now.state]<now.w)	continue;
-		// printf("%d %d %d\n",now.v,now.w,now.state);
-		if(now.v == en && now.state == l+1){
-			cout << now.w << '\n';
-			goto reset;
-		}
-		for(auto x:g[now.v]){
-			int nxstate = now.state + (val[x.first] == now.state);
-			if(dis[x.first][nxstate]<=now.w+x.second)	continue;
-			dis[x.first][nxstate] = now.w+x.second;
-			heap.push({x.first,now.w+x.second,nxstate});
+	rep(i,1,100){
+		rep(j,1,n)	dis[i][j] = 1e9;
+		for(auto x:node[i])
+			heap.push({x,0}),dis[i][x] = 0;
+		while(!heap.empty()){
+			A now = heap.top();
+			heap.pop();
+			if(dis[i][now.v]<now.w)	continue;
+			for(auto x:g[now.v]){
+				if(dis[i][x.v]<=now.w+x.w)	continue;
+				dis[i][x.v] = now.w + x.w;
+				heap.push({x.v,now.w + x.w});
+			}
 		}
 	}
-	cout << "-1\n";
-	reset:rep(i,1,n+1)	g[i].clear();
+	LL ans = 1e18;
+	rep(i,1,n){
+		vector<int > temp;
+		rep(j,1,100)	temp.push_back(dis[j][i]);
+		sort(all(temp));
+		LL sum = 0;
+		rep(j,0,a-1){
+			if(temp[j] == 1e9){
+				sum = 1e18;
+				break;
+			}
+			sum+=temp[j];
+		}
+		ans = min(ans,sum);
+	}
+	if(ans == 1e18)	cout << "-1\n";
+	else			cout << ans << '\n';
+	rep(i,1,n)		g[i].clear();
+	rep(i,1,100)	node[i].clear();
 }
 int main(){
 	cin.tie(0)->sync_with_stdio(0);
@@ -79,17 +99,3 @@ int main(){
 	}
 	return 0;
 }
-/*
-1
-6 8 3
-1 6
-0 2 1 1 4 3
-1 2 20
-1 3 80
-3 2 100
-2 4 30
-4 2 40
-2 6 25
-2 5 15
-5 6 50
-*/
