@@ -1,10 +1,10 @@
 /*
-	Task	: PZ_Camera
+	Task	: PZ_Peak_Position
 	Author	: Phumipat C. [MAGCARI]
 	Language: C++
-	Created	: 18 May 2021 [21:56]
+	Created	: 19 May 2021 [15:23]
 	Algo	: 
-	Status	: Unfinished
+	Status	: 
 */
 #include<bits/stdc++.h>
 #define rep(i, a, b) for(int i = a; i <= (b); ++i)
@@ -14,7 +14,7 @@
 #define rmdup(x) (x).resize(unique((x).begin(),(x).end())-(x).begin())
 #define sz(x) (int)(x).size()
 #define decp(x) fixed << setprecision(x)
-#define MOD (LL )(1e9+7)
+#define MOD (LL )(1e9+9)
 using namespace std;
 using LL = long long;
 using PII = pair<int ,int >;
@@ -28,59 +28,24 @@ LL modN(LL a,LL b,LL c = MOD){
 	if(b&1)	return (((now*now)%c)*(a%c))%c;
 	else	return (now*now)%c;
 }
-const int N = 100010;
-const int C = 1e6 + 10;
-bool seive[C];
-vector<int > p;
-void gen_prime(){
-	rep(i,2,sqrt(C)){
-		if(seive[i])	continue;
-		p.push_back(i);
-		rep(j,i+i,1e6)
-			seive[j] = true;
-	}
-}
-int a[N];
-map<int ,int > mapp;
-vector<int > v;
-int mark[N],dp[N],qs[N];
+const int N = 1000010;
+LL dp1[N],dp2[N],f[N];
 void solve(){
-	gen_prime();
-	int n,q,k;
-	cin >> n >> q >> k;
-	rep(i,1,n){
-		cin >> a[i];
-		for(auto x:p){
-			if(x*x>a[i])		break;
-			while(!(a[i]%(x*x)))	a[i]/=(x*x);
-		}
-		v.push_back(a[i]);
-	}
-	sort(all(v));	rmdup(v);
-	rep(i,1,n)
-		a[i] = lower_bound(all(v),a[i])-v.begin();
-	int idx = 0,cnt = 0;
-	rep(i,1,n){
-		while(idx<=n && cnt<k){
-			idx++;
-			mark[a[idx]]++;
-			if(mark[a[idx]] == 1)	cnt++;
-		}
-		dp[i] = idx;
-		mark[a[i]]--;
-		if(!mark[a[i]])	cnt--;
-	}
-	int l,r;
-	while(q--){
-		cin >> l >> r;
-		idx = upper_bound(dp+1,dp+n+1,r)-dp-1;
-	}
+	int n;
+	cin >> n;
+	cout << dp2[n] << '\n';
 }
 int main(){
 	cin.tie(0)->sync_with_stdio(0);
 	cin.exceptions(cin.failbit);
 	int q = 1;
-	// cin >> q;
+	f[0] = f[1] = 1;
+	rep(i,2,1e6){
+		f[i] = (i*f[i-1])%MOD;
+		dp1[i] = ((LL )(i-1)*(i-2)+dp1[i-1])%MOD;
+		dp2[i] = (dp1[i]*f[i-2])%MOD;
+	}
+	cin >> q;
 	for(int Q=1;Q<=q;Q++){
 		// cout << "Case #" << Q << ": ";
 		solve();
