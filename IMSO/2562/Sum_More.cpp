@@ -34,7 +34,7 @@ int main(){
         id[i] = lower_bound(comp+1,comp+n+2,qs[i])-comp;
     int idx0 = lower_bound(comp+1,comp+n+2,0)-comp;
     while(l<r){
-        mid = (l+r)/2,countt = 0;
+        mid = (l+r+1)/2,countt = 0;
         update(idx0,1);
         for(int i=1;i<=n;i++){
             idx = upper_bound(comp+1,comp+n+2,qs[i]-mid)-comp-1;
