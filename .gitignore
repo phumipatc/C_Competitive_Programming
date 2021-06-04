@@ -55,6 +55,3 @@ test.cpp
 *.tex
 _*
 template.cpp
-
-IMSO/**
-Website/APIO/**
