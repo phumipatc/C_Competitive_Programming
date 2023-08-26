@@ -89,5 +89,6 @@
 	},
     "workbench.colorCustomizations": {},
 	"C_Cpp.errorSquiggles": "Enabled",
-	"python.pythonPath": "C:\\Users\\bossy\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
+	"python.pythonPath": "C:\\Users\\bossy\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
+	"C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\g++.exe"
 }
